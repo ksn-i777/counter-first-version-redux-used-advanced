@@ -3,7 +3,7 @@ import reportWebVitals from './reportWebVitals';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import AppWithReduxAdvanced from './AppWithReduxAdvanced'
+import { AppWithReduxAdvanced } from './AppWithReduxAdvanced'
 import { store } from './redux/store'
 import { Provider } from 'react-redux';
 

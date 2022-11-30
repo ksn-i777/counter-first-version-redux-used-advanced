@@ -3,7 +3,7 @@ import './App.css';
 import { SettingsCounter } from './components/SettingsCounter/SettingsCounter';
 import { Counter } from './components/Counter/Counter';
 
-function App() {
+export function AppWithReduxAdvanced() {
 
     return (
         <div className="App">
@@ -14,5 +14,3 @@ function App() {
         </div>
     );
 }
-
-export default App
