@@ -1,22 +1,22 @@
-import React from 'react';
-import s from './SetButton.module.css';
-import { Button } from '../Button';
+import React from 'react'
+import s from './SetButton.module.css'
+import { Button } from '../Button'
 import { useSelector, useDispatch } from 'react-redux'
-import { RootState } from './../../redux/store'
+import { AppDispatchType, AppStateType } from './../../redux/store'
 import { notMessageAC } from './../../redux/infoMessage-reducer'
-import { resCounterAC} from './../../redux/counter-reducer'
+import { resCounterTC } from './../../redux/counter-reducer'
 
 export function SetButton() {
 
-    const dispatch = useDispatch()
-    const minValue = useSelector<RootState, number>(s => s.minInput)
-    const message = useSelector<RootState, string>(s => s.infoMessage)
-    const error = useSelector<RootState, string>(s => s.error)
+    const dispatch = useDispatch<AppDispatchType>()
+    const minValue = useSelector<AppStateType, number>(s => s.minInput)
+    const message = useSelector<AppStateType, string>(s => s.infoMessage)
+    const error = useSelector<AppStateType, string>(s => s.error)
 
     function setStartValue() {
         if (!error) {
             dispatch(notMessageAC())
-            dispatch(resCounterAC(minValue))
+            dispatch(resCounterTC(minValue))
         }
     }
 

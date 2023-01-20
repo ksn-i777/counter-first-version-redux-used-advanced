@@ -1,29 +1,29 @@
 import React from 'react'
 import s from './Inputs.module.css'
 import { useSelector, useDispatch } from 'react-redux'
-import { RootState } from './../../redux/store'
-import { minInputAC } from './../../redux/minInput-reducer'
-import { maxInputAC } from './../../redux/maxInput-reducer'
+import { AppDispatchType, AppStateType } from './../../redux/store'
+import { setMinInputValueTC } from './../../redux/minInput-reducer'
+import { setMaxInputValueTC } from './../../redux/maxInput-reducer'
 import { errorMinInputAC, errorMaxInputAC } from './../../redux/error-reducer'
 import { messageAC } from './../../redux/infoMessage-reducer'
 
 export function Inputs() {
 
-    const dispatch = useDispatch()
-    const minValue = useSelector<RootState, number>(s => s.minInput)
-    const maxValue = useSelector<RootState, number>(s => s.maxInput)
-    const error = useSelector<RootState, string>(s => s.error)
+    const dispatch = useDispatch<AppDispatchType>()
+    const minValue = useSelector<AppStateType, number>(s => s.minInput)
+    const maxValue = useSelector<AppStateType, number>(s => s.maxInput)
+    const error = useSelector<AppStateType, string>(s => s.error)
 
     function onChangeMinInput(value: number) {
         dispatch(messageAC())
         dispatch(errorMinInputAC(value, minValue, maxValue))
-        dispatch(minInputAC(value))
+        dispatch(setMinInputValueTC(value))
     }
 
     function onChangeMaxInput(value: number) {
         dispatch(messageAC())
         dispatch(errorMaxInputAC(value, minValue, maxValue))
-        dispatch(maxInputAC(value))
+        dispatch(setMaxInputValueTC(value))
     }
 
     return (

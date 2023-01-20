@@ -1,9 +1,10 @@
-import { combineReducers, createStore } from 'redux'
-import { minInputReducer } from './minInput-reducer'
-import { maxInputReducer } from './maxInput-reducer'
-import { counterReducer } from './counter-reducer'
-import { errorReducer } from './error-reducer'
-import { messageReducer } from './infoMessage-reducer'
+import { applyMiddleware, combineReducers, legacy_createStore } from 'redux'
+import { MinInputActionsType, minInputReducer } from './minInput-reducer'
+import { MaxInputActionsType, maxInputReducer } from './maxInput-reducer'
+import { CounterActionsType, counterReducer } from './counter-reducer'
+import { errorReducer, InputsErrorActionsType } from './error-reducer'
+import { MessageActionsType, messageReducer } from './infoMessage-reducer'
+import thunkMiddlewear, { ThunkDispatch } from 'redux-thunk'
 
 const rootReducer = combineReducers({
     minInput: minInputReducer,
@@ -13,6 +14,10 @@ const rootReducer = combineReducers({
     infoMessage: messageReducer
 })
 
-export type RootState = ReturnType<typeof rootReducer>
+export const store = legacy_createStore(rootReducer, applyMiddleware(thunkMiddlewear))
 
-export const store = createStore(rootReducer)
+export type AppStateType = ReturnType<typeof rootReducer>
+
+export type AppActionsType = CounterActionsType | InputsErrorActionsType | MessageActionsType | MaxInputActionsType | MinInputActionsType
+
+export type AppDispatchType = ThunkDispatch<AppStateType, unknown, AppActionsType>
